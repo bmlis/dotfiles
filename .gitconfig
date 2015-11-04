@@ -1,0 +1,8 @@
+[alias]
+    s = status
+    b = branch
+    ch = checkout
+    cb = checkout -b
+[user]
+	email = b.m.lisiecki@gmail.com
+	name = Bartlomiej Lisiecki
