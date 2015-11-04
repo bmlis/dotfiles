@@ -5,7 +5,7 @@
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="dieter"
+ZSH_THEME="miloshadzic"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,7 +53,7 @@ plugins=(git)
 
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -82,4 +82,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export TERM=screen-256color
+
+# UTF stuff so that the shit dont wen south
+export LANG=en_US.UTF-8
+
+
+# Virtualenv wrappers
+export WORKON_HOME=~/Envs
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Launch tmux with 256 colors
+alias tmux="tmux -2"
+
+# Set vim as default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
