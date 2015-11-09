@@ -2,7 +2,7 @@
     s = status
     b = branch
 	g = log --graph --decorate --oneline
-    ch = checkout
+    co = checkout
     cb = checkout -b
 [user]
 	email = bartlomiej.lisiecki@pragmaticcoders.com
