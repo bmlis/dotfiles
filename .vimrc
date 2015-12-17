@@ -17,6 +17,8 @@ Bundle 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-scripts/indentpython.vim'
+Plugin 'crusoexia/vim-monokai'
+Plugin 'scrooloose/nerdcommenter'
 
 filetype plugin indent on
 
@@ -38,8 +40,7 @@ syntax enable
 "Theme settings
 let g:gruvbox_italic=1
 set t_Co=256
-colorscheme gruvbox
-set background=dark
+colorscheme monokai
 let g:airline_theme='durant'
 let g:airline_powerline_fonts=1
 
@@ -49,6 +50,9 @@ nmap ,sv :so $MYVIMRC<CR>
 
 " edit zsh quickly
 nmap ,ez :e ~/.zshrc<CR>
+
+" get rid of swap files
+set noswapfile
 
 "toggle bg with f5
 map <F5> :let &background = ( &background == "dark"? "light" : "dark" )<CR>

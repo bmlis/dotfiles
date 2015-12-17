@@ -97,3 +97,11 @@ alias tmux="tmux -2"
 # Set vim as default editor
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+# Virtual env settings
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Import my aliases
+source $HOME/.aliases

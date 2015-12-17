@@ -1,0 +1,2 @@
+alias run_vagrant='cd ~/programming/amazon-dev/wi-amazon-vagrant; vagrant up;'
+alias mvpn='sudo service openvpn'
