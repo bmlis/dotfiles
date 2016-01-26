@@ -142,6 +142,7 @@ if has ('gui_running')
 
 " ctrlP config
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_custom_ignore = '\v\.(pyc)$'
 
 " splits mapping
 nnoremap <c-j> <c-w>j
