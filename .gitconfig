@@ -9,3 +9,5 @@
 	name = Bartlomiej Lisiecki
 [core]
 	editor = vim
+[merge]
+    tool = meld

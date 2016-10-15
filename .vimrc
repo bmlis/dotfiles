@@ -2,24 +2,60 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
-" BUNDLES
+" Vundle
 Bundle 'gmarik/vundle'
-Bundle 'bling/vim-airline'
+
+" Looks
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 Bundle 'morhetz/gruvbox'
 Bundle 'noah/vim256-color'
+Plugin 'crusoexia/vim-monokai'
+
+" Git
 Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/nerdtree'
+Plugin 'airblade/vim-gitgutter'
+
+" Python
 Bundle 'klen/python-mode'
 Bundle 'davidhalter/jedi-vim'
+
+" IDE
 Bundle 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'crusoexia/vim-monokai'
+Bundle 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 
+"HTML
+Plugin 'alvan/vim-closetag'
+
+" CSS
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'ap/vim-css-color'
+
+" JS
+Plugin 'jason0x43/vim-js-indent'
+Plugin 'pangloss/vim-javascript'
+
+" JSON
+Plugin 'elzr/vim-json'
+
+" Typescript
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
+
+"React
+Plugin 'mxw/vim-jsx'
+
+" Ruby
+Plugin 'vim-ruby/vim-ruby'
+
+call vundle#end()  
 filetype plugin indent on
 
 " Hihlight everythin exceeding 80 chars
@@ -40,8 +76,9 @@ syntax enable
 "Theme settings
 let g:gruvbox_italic=1
 set t_Co=256
-colorscheme monokai
-let g:airline_theme='durant'
+colorscheme solarized 
+set background=dark
+let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
 
 " edit vim quickly
@@ -54,9 +91,6 @@ nmap ,ez :e ~/.zshrc<CR>
 " get rid of swap files
 set noswapfile
 
-"toggle bg with f5
-map <F5> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
 if has("gui_running")
     set guioptions-=T
     set guioptions+=e
@@ -64,7 +98,7 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
-set encoding=utf8
+set encoding=utf-8
 
 set laststatus=2
 
@@ -110,6 +144,9 @@ let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
+" Enable indentation
+let g:pymode_indent = 1
+
 " Breakpoint
 let g:pymode_breakpoint_cmd = "import ipdb; ipdb.set_trace()  # XXX BREAKPOINT"
 
@@ -125,19 +162,30 @@ let g:jedi#show_call_signatures = 0
 " Open goto in new tab
 let g:jedi#use_tabs_not_buffers = 1
 
+" Turn off real time mode in gitgutter (because of error)
+let g:gitgutter_realtime = 0
+
 " Use <leader>l to toggle display of whitespace
 nmap <leader>l :set list!<CR>
 " " automatically change window's cwd to file's dir
 set autochdir
 "
-" " I'm prefer spaces to tabs
+" " I prefer spaces to tabs
 set tabstop=4
 set shiftwidth=4
 set expandtab
 
+autocmd Filetype html setlocal ts=2 sw=2 expandtab
+autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
+autocmd Filetype scss setlocal ts=2 sw=2 expandtab
+autocmd Filetype css setlocal ts=2 sw=2 expandtab
+
+
 " " more subtle popup colors 
 if has ('gui_running')
     highlight Pmenu guibg=#cccccc gui=bold    
+    set gfn=Liberation\ Mono\ for\ Powerline\ 12
+
     endif
 
 " ctrlP config
@@ -149,3 +197,36 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" tabs mappings
+nnoremap <M-1> 1gt
+nnoremap <M-2> 2gt
+nnoremap <M-3> 3gt
+nnoremap <M-4> 4gt
+nnoremap <M-5> 5gt
+nnoremap <M-6> 6gt
+nnoremap <M-7> 7gt
+nnoremap <M-8> 8gt
+nnoremap <M-9> 9gt
+nnoremap <M-0> 10gt
+
+" copying and pasting
+set clipboard+=unnamed
+set paste
+
+" JSX
+let g:jsx_ext_required = 0
+let g:closetag_filenames = "*.html,*.xhtml,*.xml,*.js,*.html.erb"
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+let g:syntastic_javascript_eslint_exec = '/bin/ls'
+let g:syntastic_javascript_checkers = ['eslint']
