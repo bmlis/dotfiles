@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/hino/.oh-my-zsh
+  export ZSH=/home/h3ra/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -90,7 +90,7 @@ export LANG=en_US.UTF-8
 alias tmux="tmux -2"
 
 # Set vim as default editor
-export VISUAL=vim
+export VISUAL=emacs
 export EDITOR="$VISUAL"
 
 # Virtual env settings
@@ -112,9 +112,5 @@ eval "$(pyenv init -)"
 export NVM_DIR="/home/hino/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export MSYS_HOME=/c/msys/1.0
-source /usr/bin/virtualenvwrapper.sh
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

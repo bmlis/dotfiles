@@ -5,5 +5,6 @@ cp ../.gitconfig ~/.
 cp ../.vimrc ~/.
 cp ../.tmux.conf ~/.
 cp ../.aliases ~/.
+cp -r ../.i3 ~/.
 
 echo '...finished'

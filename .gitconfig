@@ -1,13 +1,13 @@
 [alias]
     s = status
     b = branch
-	g = log --graph --decorate --oneline
+        g = log --graph --decorate --oneline
     co = checkout
     cb = checkout -b
 [user]
-	email = bartlomiej.lisiecki@pragmaticcoders.com
-	name = Bartlomiej Lisiecki
+        email = bartlomiej.lisiecki@pragmaticcoders.com
+        name = Bartlomiej Lisiecki
 [core]
-	editor = vim
+        editor = emacs -nw
 [merge]
     tool = meld
