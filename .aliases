@@ -1,9 +1,6 @@
 # setup tmux
 alias run_tmux='cd ~/Workspace; tmux;'
 
-alias svim='sudo -E vimx'
-alias vim='vimx'
-
 # docker removal
 alias rmi_dangling='docker rmi --force $(docker images -f "dangling=true" -q)'
 alias vrm_dangling='docker volume rm $(docker volume ls -qf dangling=true)'

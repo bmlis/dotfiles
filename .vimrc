@@ -1,62 +1,62 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#begin()
+" set rtp+=~/.vim/bundle/vundle/
+" call vundle#begin()
 
 " Vundle
-Bundle 'gmarik/vundle'
+" Bundle 'gmarik/vundle'
 
 " Looks
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'morhetz/gruvbox'
-Bundle 'noah/vim256-color'
-Plugin 'crusoexia/vim-monokai'
+" Bundle 'vim-airline/vim-airline'
+" Bundle 'vim-airline/vim-airline-themes'
+" Bundle 'morhetz/gruvbox'
+" Bundle 'noah/vim256-color'
+" Plugin 'crusoexia/vim-monokai'
 
 " Git
-Bundle 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+" Bundle 'tpope/vim-fugitive'
+" Plugin 'airblade/vim-gitgutter'
 
 " Python
-Bundle 'klen/python-mode'
-Bundle 'davidhalter/jedi-vim'
+" Bundle 'klen/python-mode'
+" Bundle 'davidhalter/jedi-vim'
 
 " IDE
-Bundle 'kien/ctrlp.vim'
-Plugin 'mileszs/ack.vim'
-Bundle 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+" Bundle 'kien/ctrlp.vim'
+" Plugin 'mileszs/ack.vim'
+" Bundle 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdcommenter'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'scrooloose/syntastic'
 
 "HTML
-Plugin 'alvan/vim-closetag'
+" Plugin 'alvan/vim-closetag'
 
 " CSS
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'ap/vim-css-color'
+" Plugin 'cakebaker/scss-syntax.vim'
+" Plugin 'ap/vim-css-color'
 
 " JS
-Plugin 'jason0x43/vim-js-indent'
-Plugin 'pangloss/vim-javascript'
+" Plugin 'jason0x43/vim-js-indent'
+" Plugin 'pangloss/vim-javascript'
 
 " JSON
-Plugin 'elzr/vim-json'
+" Plugin 'elzr/vim-json'
 
 " Typescript
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Quramy/tsuquyomi'
-Plugin 'leafgarland/typescript-vim'
+" Plugin 'Shougo/vimproc.vim'
+" Plugin 'Quramy/tsuquyomi'
+" Plugin 'leafgarland/typescript-vim'
 
 "React
-Plugin 'mxw/vim-jsx'
+" Plugin 'mxw/vim-jsx'
 
 " Ruby
-Plugin 'vim-ruby/vim-ruby'
+" Plugin 'vim-ruby/vim-ruby'
 
-call vundle#end()  
-filetype plugin indent on
+" call vundle#end()  
+" filetype plugin indent on
 
 " Hihlight everythin exceeding 80 chars
 augroup vimrc_autocmds
