@@ -4,3 +4,5 @@ alias run_tmux='cd ~/Workspace; tmux;'
 # docker removal
 alias rmi_dangling='docker rmi --force $(docker images -f "dangling=true" -q)'
 alias vrm_dangling='docker volume rm $(docker volume ls -qf dangling=true)'
+
+alias ec='emacsclient -c -n -F "'\''(fullscreen . maximized)"'
