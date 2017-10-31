@@ -8,6 +8,6 @@
         email = bartlomiej.lisiecki@pragmaticcoders.com
         name = Bartlomiej Lisiecki
 [core]
-        editor = emacs -nw
+        editor = vim
 [merge]
     tool = meld
