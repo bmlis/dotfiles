@@ -9,5 +9,6 @@
         name = Bartlomiej Lisiecki
 [core]
         editor = vim
+        excludesfile = /home/h3ra/.gitignore_global
 [merge]
     tool = meld
