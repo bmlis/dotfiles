@@ -6,3 +6,4 @@ alias rmi_dangling='docker rmi --force $(docker images -f "dangling=true" -q)'
 alias vrm_dangling='docker volume rm $(docker volume ls -qf dangling=true)'
 
 alias ec='emacsclient -c -n -F "'\''(fullscreen . maximized)"'
+alias ec_restart="kill -9 `ps aux | grep "[e]macs --daemon" | awk '{print $2}'`; emacs --daemon"
