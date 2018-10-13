@@ -5,7 +5,7 @@
     co = checkout
     cb = checkout -b
 [user]
-        email = bartlomiej.lisiecki@rumblefish.pl
+        email = b.m.lisiecki@gmail.com
         name = Bartlomiej Lisiecki
 [core]
         editor = vim
