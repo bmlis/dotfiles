@@ -372,6 +372,7 @@ you should place your code here."
 (setq js2-mode-show-parse-errors nil
       js2-mode-show-strict-warnings nil)
 (global-company-mode)
+(add-hook 'before-save-hook 'whitespace-cleanup))
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
