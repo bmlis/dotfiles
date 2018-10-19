@@ -114,3 +114,10 @@ export NVM_DIR="$HOME/.nvm"
 
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh
