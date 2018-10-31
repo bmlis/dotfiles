@@ -143,7 +143,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Fantasque Sans Mono"
-                               :size 18
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -314,46 +314,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   )
 
-(defcustom add-node-modules-path-debug nil
-  "Enable verbose output when non nil."
-  :type 'boolean)
-
-;;;###autoload
-(defcustom add-node-modules-max-depth 20
-  "Max depth to look for node_modules."
-  :type 'integer)
-
-(defun add-node-modules-path ()
-  "Search the current buffer's parent directories for `node_modules/.bin`.
-Traverse the directory structure up, until reaching the user's home directory,
- or hitting add-node-modules-max-depth.
-Any path found is added to the `exec-path'."
-  (interactive)
-  (let* ((default-dir (expand-file-name default-directory))
-         (file (or (buffer-file-name) default-dir))
-         (home (expand-file-name "~"))
-         (iterations add-node-modules-max-depth)
-         (root (directory-file-name (or (and (buffer-file-name) (file-name-directory (buffer-file-name))) default-dir)))
-         (roots '()))
-    (while (and root (> iterations 0))
-      (setq iterations (1- iterations))
-      (let ((bindir (expand-file-name "node_modules/.bin/" root)))
-        (when (file-directory-p bindir)
-          (add-to-list 'roots bindir)))
-      (if (string= root home)
-          (setq root nil)
-        (setq root (directory-file-name (file-name-directory root)))))
-    (if roots
-        (progn
-          (make-local-variable 'exec-path)
-          (while roots
-            (add-to-list 'exec-path (car roots))
-            (when add-node-modules-path-debug
-              (message (concat "added " (car roots) " to exec-path")))
-            (setq roots (cdr roots))))
-      (when add-node-modules-path-debug
-        (message (concat "node_modules/.bin not found for " file))))))
-
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -371,11 +331,12 @@ you should place your code here."
 (add-hook 'flycheck-mode-hook 'flycheck-load-config)
 (editorconfig-mode 1)
 (eval-after-load 'js2-mode
-  '(add-hook 'js2-mode-hook #'add-node-modules-path))
-(setq js2-mode-show-parse-errors nil
+  '(add-hook 'js2-mode-hook #'add-node-modules-path js2-mode-show-parse-errors nil
       js2-mode-show-strict-warnings nil)
 (global-company-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
+(setq helm-ag-use-agignore t)
+(setq helm-ag-command-option " -U" )
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
