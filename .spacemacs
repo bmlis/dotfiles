@@ -314,6 +314,50 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   )
 
+(defcustom add-node-modules-path-debug nil
+  "Enable verbose output when non nil."
+  :type 'boolean)
+
+;;;###autoload
+(defcustom add-node-modules-max-depth 20
+  "Max depth to look for node_modules."
+  :type 'integer)
+
+;;;###autoload
+(defun add-node-modules-path ()
+  "Search the current buffer's parent directories for `node_modules/.bin`.
+Traverse the directory structure up, until reaching the user's home directory,
+ or hitting add-node-modules-max-depth.
+Any path found is added to the `exec-path'."
+  (interactive)
+  (let* ((default-dir (expand-file-name default-directory))
+         (file (or (buffer-file-name) default-dir))
+         (home (expand-file-name "~"))
+         (iterations add-node-modules-max-depth)
+         (root (directory-file-name (or (and (buffer-file-name) (file-name-directory (buffer-file-name))) default-dir)))
+         (roots '()))
+    (while (and root (> iterations 0))
+      (setq iterations (1- iterations))
+      (let ((bindir (expand-file-name "node_modules/.bin/" root)))
+        (when (file-directory-p bindir)
+          (add-to-list 'roots bindir)))
+      (if (string= root home)
+          (setq root nil)
+        (setq root (directory-file-name (file-name-directory root)))))
+    (if roots
+        (progn
+          (make-local-variable 'exec-path)
+          (while roots
+            (add-to-list 'exec-path (car roots))
+            (when add-node-modules-path-debug
+              (message (concat "added " (car roots) " to exec-path")))
+            (setq roots (cdr roots))))
+      (when add-node-modules-path-debug
+        (message (concat "node_modules/.bin not found for " file))))))
+
+(provide 'add-node-modules-path)
+
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -339,19 +383,6 @@ you should place your code here."
 (setq helm-ag-use-agignore t)
 (setq helm-ag-command-option " -U" )
 )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(package-selected-packages
-   (quote
-    (toml-mode racer flycheck-rust cargo rust-mode clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode rainbow-mode helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-tern dash-functional company-statistics company auto-yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md editorconfig yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode flycheck-pos-tip pos-tip flycheck emmet-mode add-node-modules-path tern web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
-
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -362,10 +393,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (vmd-mode toml-mode racer flycheck-rust cargo rust-mode clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode rainbow-mode helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-tern dash-functional company-statistics company auto-yasnippet ac-ispell auto-complete mmm-mode markdown-toc markdown-mode gh-md editorconfig yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode flycheck-pos-tip pos-tip flycheck emmet-mode add-node-modules-path tern web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (yasnippet-snippets yaml-mode ws-butler winum web-mode web-beautify volatile-highlights vmd-mode vi-tilde-fringe uuidgen toml-mode toc-org tao-theme tagedit symon string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode scss-mode sass-mode rjsx-mode restart-emacs rainbow-mode rainbow-delimiters racer pug-mode prettier-js popwin persp-mode password-generator paradox overseer org-bullets open-junk-file neotree nameless move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum livid-mode skewer-mode link-hint json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide impatient-mode htmlize simple-httpd hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy flycheck-rust flycheck-pos-tip pos-tip flycheck flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub treepy graphql with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu emmet-mode elisp-slime-nav editorconfig dumb-jump doom-modeline eldoc-eval shrink-path all-the-icons memoize f define-word counsel-projectile projectile counsel swiper ivy company-web web-completion-data company-tern s dash-functional tern dash company-statistics company column-enforce-mode clojure-snippets clojure-cheatsheet clean-aindent-mode cider-eval-sexp-fu eval-sexp-fu highlight cider sesman spinner queue pkg-info clojure-mode epl centered-cursor-mode cargo markdown-mode rust-mode auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -373,9 +403,3 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  )
 )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
