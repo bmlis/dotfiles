@@ -121,3 +121,12 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh
+
+
+
+# ANDROID STUDIO
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
