@@ -387,7 +387,7 @@ you should place your code here."
   (setq helm-ag-use-agignore t)
   (setq tao-theme-use-sepia nil)
   (setq helm-ag-command-option " -U" )
-
+  (setq tern-command (append tern-command '("--no-port-file")))
   (setq org-agenda-files (list "~/Nextcloud/todos.org"))
 )
 
