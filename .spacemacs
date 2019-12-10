@@ -147,8 +147,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dracula
-                         material
+   dotspacemacs-themes '(monokai
+                         tao-yin
                          nord
                          tao-yin
                          spacemacs-dark
@@ -157,8 +157,8 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Fantasque Sans Mono"
-                               :size 16
+   dotspacemacs-default-font '("FiraCode Retina"
+                               :size 24
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -407,7 +407,10 @@ you should place your code here."
   (setq helm-ag-command-option " -U" )
 
   (add-hook 'web-mode-hook 'indent-web-mode-hook)
-
+  (mac-auto-operator-composition-mode)
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin/ag"))
+  (setq helm-ag-base-command "ag --nogroup --nocolor --vimgrep")
+  (set-face-attribute 'default nil :font "Fira Code Retina-14")
 )
 
 (custom-set-variables
@@ -415,16 +418,18 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#080808" "#d70000" "#67b11d" "#875f00" "#268bd2" "#af00df" "#00ffff" "#b2b2b2"])
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (ox-gfm org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode nginx-mode smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub treepy graphql with-editor yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vmd-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tao-theme tagedit spaceline slim-mode scss-mode sass-mode restart-emacs request rainbow-mode rainbow-delimiters racer pug-mode popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js2-refactor js-doc indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gh-md fuzzy flycheck-rust flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav editorconfig dumb-jump diminish define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent add-node-modules-path adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (yapfify unfill terraform-mode hcl-mode powerline smart-mode-line rich-minority pyvenv pytest pyenv-mode py-isort pony-mode pip-requirements ob-elixir nord-theme mwim skewer-mode simple-httpd live-py-mode js2-mode hy-mode parent-mode helm-pydoc projectile haml-mode git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flyspell-correct-helm flyspell-correct flycheck-mix flycheck-credo flycheck flx highlight smartparens iedit anzu evil goto-chg undo-tree dockerfile-mode docker transient tablist docker-tramp json-snatcher json-reformat diff-hl cython-mode csv-mode web-completion-data dash-functional tern company-quickhelp pos-tip company-anaconda hydra inflections edn multiple-cursors paredit peg lv eval-sexp-fu cider sesman spinner queue parseedn clojure-mode parseclj a markdown-mode rust-mode bind-map bind-key yasnippet auto-dictionary packed anaconda-mode pythonic f alchemist s company dash elixir-mode pkg-info epl helm avy helm-core async auto-complete popup ox-gfm org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode nginx-mode smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub treepy graphql with-editor yaml-mode ws-butler winum which-key web-mode web-beautify volatile-highlights vmd-mode vi-tilde-fringe uuidgen use-package toml-mode toc-org tao-theme tagedit spaceline slim-mode scss-mode sass-mode restart-emacs request rainbow-mode rainbow-delimiters racer pug-mode popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc macrostep lorem-ipsum livid-mode linum-relative link-hint json-mode js2-refactor js-doc indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gh-md fuzzy flycheck-rust flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu emmet-mode elisp-slime-nav editorconfig dumb-jump diminish define-word company-web company-tern company-statistics column-enforce-mode coffee-mode clojure-snippets clj-refactor clean-aindent-mode cider-eval-sexp-fu cargo auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent add-node-modules-path adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:background nil)))))
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
