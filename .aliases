@@ -7,3 +7,4 @@ alias vrm_dangling='docker volume rm $(docker volume ls -qf dangling=true)'
 
 alias ec='emacsclient -c -n -F "'\''(fullscreen . maximized)"'
 alias ec_restart="killall -q emacs; emacs --daemon"
+alias 155='cd ~/Workspace/15five/fifteen5/'

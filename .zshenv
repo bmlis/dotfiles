@@ -10,3 +10,4 @@ export NVM_DIR="$HOME/.nvm"
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+source $HOME/.poetry/env
