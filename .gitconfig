@@ -7,6 +7,7 @@
 [user]
         email = b.m.lisiecki@gmail.com
         name = Bartlomiej Lisiecki
+	signingkey = 2FA91D5F5DD2CDA8
 [core]
         editor = vim
         excludesfile = /home/deadpixel/.gitignore_global
