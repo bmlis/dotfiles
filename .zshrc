@@ -107,13 +107,6 @@ source $HOME/.aliases
 # export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
 
-# PYENV
-# COMMENTEDPATH
-# export PYENV_ROOT="$HOME/.pyenv"
-# export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 # COMMENTEDPATH
 # export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -129,8 +122,8 @@ eval "$(pyenv virtualenv-init -)"
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh
 
-
-. $(brew --prefix asdf)/asdf.sh
-
-. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+if test -d $(brew --prefix asdf); then
+	. $(brew --prefix asdf)/asdf.sh
+	. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
+fi	
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
