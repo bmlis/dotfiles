@@ -13,3 +13,5 @@
         excludesfile = /home/deadpixel/.gitignore_global
 [merge]
     tool = meld
+[commit]
+	gpgsign = true
