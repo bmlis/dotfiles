@@ -54,6 +54,7 @@ ZSH_THEME="spaceship"
 plugins=(
     git
     poetry
+    asdf
 )
 
 # User configuration
@@ -122,8 +123,4 @@ source $HOME/.aliases
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh
 
-if test -d $(brew --prefix asdf); then
-	. $(brew --prefix asdf)/asdf.sh
-	. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash
-fi	
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
