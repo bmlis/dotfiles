@@ -1,4 +1,5 @@
-export ZSH=/Users/`id -un`/.oh-my-zsh
+export H_USER=`id -un`
+export ZSH=/Users/$H_USER/.oh-my-zsh
 export LANG=en_US.UTF-8
 export VISUAL=emacs
 export EDITOR="$VISUAL"
