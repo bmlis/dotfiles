@@ -14,3 +14,10 @@ fi
 if test -d $HOME/.poetry; then
 	source $HOME/.poetry/env
 fi
+if test -d /usr/local/opt/openjdk; then
+	export PATH="/usr/local/opt/openjdk/bin:$PATH"
+fi
+
+if test -d ~/.asdf/plugins/golang; then
+	. ~/.asdf/plugins/golang/set-env.zsh
+fi
