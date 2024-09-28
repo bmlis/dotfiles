@@ -1,17 +1,19 @@
 [alias]
-    s = status
-    b = branch
-        g = log --graph --decorate --oneline
-    co = checkout
-    cb = checkout -b
+  s = status
+  b = branch
+      g = log --graph --decorate --oneline
+  co = checkout
+  cb = checkout -b
 [user]
-        email = b.m.lisiecki@gmail.com
-        name = Bartlomiej Lisiecki
-	signingkey = 2FA91D5F5DD2CDA8
+  email = b.m.lisiecki@gmail.com
+  name = Bartlomiej Lisiecki
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ487PPB0h2EgrBi80ZT+oVLbjo7OFVPgxPi75oeBCd5
 [core]
-        editor = vim
-        excludesfile = /home/deadpixel/.gitignore_global
-[merge]
-    tool = meld
+  editor = vim
+  excludesfile = /home/deadpixel/.gitignore_global
 [commit]
 	gpgsign = true
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"

@@ -5,13 +5,6 @@ export VISUAL=emacs
 export EDITOR="$VISUAL"
 export NVM_DIR="$HOME/.nvm"
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-if [ -x "$(command -v pyenv)" ]
-then
-	export PYENV_ROOT="$HOME/.pyenv"
-	export PATH="$PYENV_ROOT/bin:$PATH"
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
-fi
 if test -d $HOME/.poetry; then
 	source $HOME/.poetry/env
 fi
@@ -22,3 +15,4 @@ fi
 if test -d ~/.asdf/plugins/golang; then
 	. ~/.asdf/plugins/golang/set-env.zsh
 fi
+. "$HOME/.cargo/env"

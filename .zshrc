@@ -55,6 +55,7 @@ plugins=(
     git
     poetry
     asdf
+    zsh-autosuggestions
 )
 
 # User configuration
@@ -124,3 +125,13 @@ source $HOME/.aliases
 [[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if which pyenv > /dev/null
+then
+	export PYENV_ROOT="$HOME/.pyenv"
+	export PATH="$PYENV_ROOT/bin:$PATH"
+	eval "$(pyenv init -)"
+	eval "$(pyenv virtualenv-init -)"
+fi
+
+export PATH="$PATH:$HOME/.local/bin:$HOME/development/flutter/bin"
+
