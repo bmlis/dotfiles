@@ -203,7 +203,7 @@
       "float" : 190
     },
     "subsequentExecutionMode" : {
-      "int" : 0
+      "int" : 4
     },
     "systemWideMouseDown" : {
       "int" : 0
@@ -279,7 +279,7 @@
     },
     "maximize" : {
       "keyCode" : 3,
-      "modifierFlags" : 1441792
+      "modifierFlags" : 786432
     },
     "maximizeHeight" : {
       "keyCode" : 126,
