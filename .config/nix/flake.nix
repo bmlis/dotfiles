@@ -82,6 +82,27 @@
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
+
+      system.defaults = {
+          dock.autohide = true;
+          dock.persistent-apps = [
+            "/Applications/Safari.app"
+            "${pkgs.alacritty}/Applications/Alacritty.app"
+            "/System/Applications/System\ Settings.app"
+            "/System/Applications/Notes.app"
+            "/System/Applications/Calendar.app"
+            "/System/Applications/Reminders.app"
+            "/Applications/1Password.app" # Move to nix
+            "/Applications/WhatsApp.app" # Move to nix
+            "/Applications/Spotify.app" # Move to nix
+            "/Applications/Proton\ Mail.app" # Move to nix
+            "/Applications/ProtonVPN.app" # Move to nix
+          ];
+          finder.FXPreferredViewStyle = "clmv";
+          loginwindow.GuestEnabled = false;
+          NSGlobalDomain.AppleInterfaceStyle = "Dark";
+          NSGlobalDomain.KeyRepeat = 2;
+      };
     };
   in
   {
