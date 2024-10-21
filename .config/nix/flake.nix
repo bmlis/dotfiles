@@ -24,15 +24,23 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle }:
   let
-    configuration = { pkgs, config, ... }: {
+    configuration = { pkgs, config, lib, ... }: {
       nixpkgs.config.allowUnfree = true;
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = [ 
         pkgs.alacritty
         pkgs.asdf-vm
+        pkgs.fzf
         pkgs.mkalias # To handle spotlight shortcuts
         pkgs.neovim
+        pkgs.oh-my-posh
+        pkgs.stow
+        pkgs.zsh-fzf-tab
+      ];
+
+      fonts.packages = with pkgs; [
+        (nerdfonts.override { fonts = [ "VictorMono" ]; })
       ];
 
       homebrew = {
@@ -40,6 +48,9 @@
         onActivation.cleanup = "zap";
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
+        brews = [
+          "tpm"
+        ];
       };
 
       system.activationScripts.applications.text = let
@@ -61,6 +72,33 @@
           ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
         done
             '';
+      system.activationScripts.extraUserActivation.enable = true;
+      system.activationScripts.extraUserActivation.text = let
+        hotkeys = [
+            60 # change input
+            61 # change forward input
+        ];
+        disableHotKeyCommands = map (key:
+          "defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add ${toString key} '
+    <dict>
+      <key>enabled</key><false/>
+      <key>value</key>
+      <dict>
+        <key>type</key><string>standard</string>
+        <key>parameters</key>
+        <array>
+          <integer>65535</integer>
+          <integer>65535</integer>
+          <integer>0</integer>
+        </array>
+      </dict>
+    </dict>'") hotkeys;
+      in ''
+        echo >&2 "configuring hotkeys..."
+        ${lib.concatStringsSep "\n" disableHotKeyCommands}
+        # credit: https://zameermanji.com/blog/2021/6/8/applying-com-apple-symbolichotkeys-changes-instantaneously/
+        /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+      '';
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -70,8 +108,8 @@
       nix.settings.experimental-features = "nix-command flakes";
 
       # Create /etc/zshrc that loads the nix-darwin environment.
-      programs.zsh.enable = true;  # default shell on catalina
-      # programs.fish.enable = true;
+      programs.zsh.enable = true;
+      programs.tmux.enable = true;
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;

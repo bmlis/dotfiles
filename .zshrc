@@ -1,137 +1,89 @@
-# Path to your oh-my-zsh installation.
+# Zinit
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-# COMMENTEDPATH
-# export ZSH=/Users/h3ra/.oh-my-zsh
+# Prompt
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/base.toml)"
+fi
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="spaceship"
+# Plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+zinit snippet OMZP::asdf
+zinit snippet OMZP::aws
+zinit snippet OMZP::gh
+zinit snippet OMZP::git
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::sudo
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Completions
+autoload -U compinit && compinit
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+zinit cdreplay -q
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# History
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory # append instead of override
+setopt sharehistory # share history between different windows
+setopt hist_ignore_space # adding a space before the command prevents adding it to history - for secrets
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}' # Ignore case on suggestions
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" # Use ls --color like colors for completion
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # Preview of the directory
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# FZF
+eval "$(fzf --zsh)"
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+# # Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    git
-    poetry
-    asdf
-    zsh-autosuggestions
-)
-
-# User configuration
-
-# COMMENTEDPATH
-# export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-# export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Aliases
+alias nzshrc="nvim ~/.zshrc"
+alias zshrc="source ~/.zshrc"
+alias ls="ls --color"
+alias rebuild=" darwin-rebuild switch --flake $HOME/Workspace/dotfiles/.config/nix#mbp"
+source $HOME/.aliases
 
 # UTF stuff so that the shit dont wen south
 # COMMENTED PATH
 # export LANG=en_US.UTF-8
 
 # Launch tmux with 256 colors
-alias tmux="tmux -2"
+# alias tmux="tmux -2"
 
-# COMMENTED PATH
-# export VISUAL=emacs
-# export EDITOR="$VISUAL"
-
-# Import my aliases
-source $HOME/.aliases
-
-# COMMENTEDPATH
-# export VAGRANT_DEFAULT_PROVIDER=virtualbox
-
-
-# COMMENTEDPATH
+# NVM
 # export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
-# COMMENTEDPATH
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh ]] && . /home/h3ra/Workspace/rumblefish/gaselle/packages/services/node_modules/tabtab/.completions/sls.zsh
-
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-if which pyenv > /dev/null
-then
-	export PYENV_ROOT="$HOME/.pyenv"
-	export PATH="$PYENV_ROOT/bin:$PATH"
-	eval "$(pyenv init -)"
-	eval "$(pyenv virtualenv-init -)"
-fi
-
-export PATH="$PATH:$HOME/.local/bin:$HOME/development/flutter/bin"
-
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# if which pyenv > /dev/null
+# then
+# 	export PYENV_ROOT="$HOME/.pyenv"
+# 	export PATH="$PYENV_ROOT/bin:$PATH"
+# 	eval "$(pyenv init -)"
+# 	eval "$(pyenv virtualenv-init -)"
+# fi
+#
+# export PATH="$PATH:$HOME/.local/bin:$HOME/development/flutter/bin"
