@@ -18,6 +18,7 @@ zinit snippet OMZP::asdf
 zinit snippet OMZP::aws
 zinit snippet OMZP::gh
 zinit snippet OMZP::git
+zinit snippet OMZL::git.zsh
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::sudo
 
@@ -66,24 +67,3 @@ alias ls="ls --color"
 alias rebuild=" darwin-rebuild switch --flake $HOME/Workspace/dotfiles/.config/nix#mbp"
 source $HOME/.aliases
 
-# UTF stuff so that the shit dont wen south
-# COMMENTED PATH
-# export LANG=en_US.UTF-8
-
-# Launch tmux with 256 colors
-# alias tmux="tmux -2"
-
-# NVM
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# if which pyenv > /dev/null
-# then
-# 	export PYENV_ROOT="$HOME/.pyenv"
-# 	export PATH="$PYENV_ROOT/bin:$PATH"
-# 	eval "$(pyenv init -)"
-# 	eval "$(pyenv virtualenv-init -)"
-# fi
-#
-# export PATH="$PATH:$HOME/.local/bin:$HOME/development/flutter/bin"
