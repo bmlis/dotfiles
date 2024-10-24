@@ -19,4 +19,5 @@ size = 15
 bindings = [{ key = "Slash", mods = "Control", chars = "\u001f" }]
 
 [shell]
-program = "/run/current-system/sw/bin/tmux"
+program = "/run/current-system/sw/bin/zsh"
+args = ["--login", "-c", "tmux"]

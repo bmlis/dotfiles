@@ -30,12 +30,19 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = [ 
         pkgs.alacritty
+        pkgs.ansible
         pkgs.asdf-vm
+        pkgs.fluxcd
         pkgs.fzf
+        pkgs.k9s
+        pkgs.kubectl
+        pkgs.lazygit
         pkgs.mkalias # To handle spotlight shortcuts
         pkgs.neovim
+        pkgs.nmap
         pkgs.oh-my-posh
         pkgs.stow
+        pkgs.terraform
         pkgs.zsh-fzf-tab
       ];
 
