@@ -36,11 +36,13 @@
         pkgs.fzf
         pkgs.k9s
         pkgs.kubectl
+        pkgs.kubeseal
         pkgs.lazygit
         pkgs.mkalias # To handle spotlight shortcuts
         pkgs.neovim
         pkgs.nmap
         pkgs.oh-my-posh
+        pkgs.spotify
         pkgs.stow
         pkgs.terraform
         pkgs.zsh-fzf-tab
@@ -56,6 +58,7 @@
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
         brews = [
+          "helm"
           "tpm"
         ];
       };
