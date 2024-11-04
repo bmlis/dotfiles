@@ -21,3 +21,6 @@ bindings = [{ key = "Slash", mods = "Control", chars = "\u001f" }]
 [shell]
 program = "/run/current-system/sw/bin/zsh"
 args = ["--login", "-c", "tmux"]
+
+[colors]
+transparent_background_colors = true

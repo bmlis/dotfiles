@@ -29,9 +29,9 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = [ 
-        pkgs.alacritty
         pkgs.ansible
         pkgs.asdf-vm
+        pkgs.awscli2
         pkgs.fluxcd
         pkgs.fzf
         pkgs.k9s
@@ -42,7 +42,6 @@
         pkgs.neovim
         pkgs.nmap
         pkgs.oh-my-posh
-        pkgs.spotify
         pkgs.stow
         pkgs.terraform
         pkgs.zsh-fzf-tab
@@ -57,8 +56,16 @@
         onActivation.cleanup = "zap";
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
+        casks = [
+            "alacritty"
+            "spotify"
+        ];
         brews = [
+          "gnupg"
           "helm"
+          "gnupg"
+          "pinentry-mac"
+          "tmux"
           "tpm"
         ];
       };
@@ -119,7 +126,6 @@
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;
-      programs.tmux.enable = true;
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -135,7 +141,7 @@
           dock.autohide = true;
           dock.persistent-apps = [
             "/Applications/Safari.app"
-            "${pkgs.alacritty}/Applications/Alacritty.app"
+            "/Applications/Alacritty.app"
             "/System/Applications/System\ Settings.app"
             "/System/Applications/Notes.app"
             "/System/Applications/Calendar.app"
