@@ -59,11 +59,14 @@
         casks = [
             "alacritty"
             "spotify"
+            "wireshark"
+            "whatsapp"
         ];
         brews = [
           "gnupg"
           "helm"
           "gnupg"
+          "node"
           "pinentry-mac"
           "tmux"
           "tpm"
