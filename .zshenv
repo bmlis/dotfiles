@@ -15,4 +15,5 @@ fi
 if test -d ~/.asdf/plugins/golang; then
 	. ~/.asdf/plugins/golang/set-env.zsh
 fi
+export PATH=${PATH}:`go env GOPATH`/bin
 . "$HOME/.cargo/env"

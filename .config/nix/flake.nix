@@ -63,9 +63,11 @@
             "whatsapp"
         ];
         brews = [
+          "caddy"
           "gnupg"
+          "gnupg"
+          "go"
           "helm"
-          "gnupg"
           "node"
           "pinentry-mac"
           "tmux"
