@@ -39,7 +39,6 @@
         pkgs.kubeseal
         pkgs.lazygit
         pkgs.mkalias # To handle spotlight shortcuts
-        pkgs.neovim
         pkgs.nmap
         pkgs.oh-my-posh
         pkgs.stow
@@ -68,10 +67,13 @@
           "gnupg"
           "go"
           "helm"
+          "neovim"
           "node"
           "pinentry-mac"
+          "tilt"
           "tmux"
           "tpm"
+          "zig"
         ];
       };
 
