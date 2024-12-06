@@ -57,6 +57,7 @@
         onActivation.upgrade = true;
         casks = [
             "alacritty"
+            "signal"
             "spotify"
             "wireshark"
             "whatsapp"
