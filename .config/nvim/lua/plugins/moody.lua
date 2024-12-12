@@ -13,7 +13,7 @@ return {
     blends = {
       normal = 0.2,
       insert = 0.2,
-      visual = 0.25,
+      visual = 0.3,
       command = 0.2,
       operator = 0.2,
       replace = 0.2,
