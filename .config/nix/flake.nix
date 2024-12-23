@@ -56,7 +56,11 @@
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
         casks = [
+            "1password"
+            "1password-cli"
+            "alfred"
             "alacritty"
+            "discord"
             "signal"
             "spotify"
             "wireshark"
@@ -142,7 +146,7 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 5;
 
-      # The platform the configuration will be used on.
+      # The platform the conf will be used on.
       nixpkgs.hostPlatform = "aarch64-darwin";
 
       system.defaults = {
@@ -160,7 +164,8 @@
             "/Applications/Proton\ Mail.app" # Move to nix
             "/Applications/ProtonVPN.app" # Move to nix
           ];
-          finder.FXPreferredViewStyle = "clmv";
+          finder.ShowPathbar = true;
+          finder.FXPreferredViewStyle = "Nlsv";
           loginwindow.GuestEnabled = false;
           NSGlobalDomain.AppleInterfaceStyle = "Dark";
           NSGlobalDomain.KeyRepeat = 2;
