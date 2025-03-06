@@ -8,6 +8,19 @@
 
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    # For qmk
+    osx-cross-arm = {
+      url = "github:osx-cross/homebrew-arm";
+      flake = false;
+    };
+    osx-cross-avr = {
+      url = "github:osx-cross/homebrew-avr";
+      flake = false;
+    };
+    qmk = {
+      url = "github:qmk/homebrew-qmk";
+      flake = false;
+    };
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -22,7 +35,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, qmk, osx-cross-arm, osx-cross-avr }:
   let
     configuration = { pkgs, config, lib, ... }: {
       nixpkgs.config.allowUnfree = true;
@@ -46,8 +59,8 @@
         pkgs.zsh-fzf-tab
       ];
 
-      fonts.packages = with pkgs; [
-        (nerdfonts.override { fonts = [ "VictorMono" ]; })
+      fonts.packages = [
+        pkgs.nerd-fonts.victor-mono
       ];
 
       homebrew = {
@@ -59,21 +72,33 @@
             "1password"
             "1password-cli"
             "alfred"
-            "alacritty"
             "discord"
+            "ghostty"
             "signal"
             "spotify"
-            "wireshark"
             "whatsapp"
+            "wireshark"
         ];
         brews = [
           "caddy"
           "gnupg"
           "gnupg"
           "go"
+          "gcc"
           "helm"
           "neovim"
           "node"
+          "qmk/qmk/qmk"
+          {
+            name = "arm-none-eabi-gcc@9";
+            link = true;
+            conflicts_with = [ "arm-none-eabi-gcc" ];
+          }
+          {
+            name = "avr-gcc@8";
+            link = true;
+            conflicts_with = [ "avr-gcc" ];
+          }
           "pinentry-mac"
           "tilt"
           "tmux"
@@ -95,7 +120,7 @@
         rm -rf /Applications/Nix\ Apps
         mkdir -p /Applications/Nix\ Apps
         find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-        while read src; do
+        while read -r src; do
           app_name=$(basename "$src")
           echo "copying $src" >&2
           ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
@@ -153,7 +178,7 @@
           dock.autohide = true;
           dock.persistent-apps = [
             "/Applications/Safari.app"
-            "/Applications/Alacritty.app"
+            "/Applications/Ghostty.app"
             "/System/Applications/System\ Settings.app"
             "/System/Applications/Notes.app"
             "/System/Applications/Calendar.app"
@@ -184,6 +209,7 @@
         nix-homebrew.darwinModules.nix-homebrew
         {
           nix-homebrew = {
+            autoMigrate = true;
             enable = true;
             enableRosetta = true;
             user = "deadpixel";
@@ -191,6 +217,9 @@
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "homebrew/homebrew-bundle" = homebrew-bundle;
+              "qmk/homebrew-qmk" = qmk;
+              "osx-cross/homebrew-arm" = osx-cross-arm;
+              "osx-cross/homebrew-avr" = osx-cross-avr;
             };
             mutableTaps = false;
           };

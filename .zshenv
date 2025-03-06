@@ -17,3 +17,4 @@ if test -d ~/.asdf/plugins/golang; then
 fi
 export PATH=${PATH}:`go env GOPATH`/bin
 . "$HOME/.cargo/env"
+export CC="gcc"
