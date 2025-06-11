@@ -3,3 +3,4 @@ alias rmi_dangling='docker rmi --force $(docker images -f "dangling=true" -q)'
 alias vrm_dangling='docker volume rm $(docker volume ls -qf dangling=true)'
 
 alias cw='cd /Users/$H_USER/Library/Mobile\ Documents/com~apple~CloudDocs/Workspace/'
+alias obs='nvim -c "cd/Users/deadpixel/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal | ObsidianToday"'
