@@ -2,9 +2,9 @@ font-family = "VictorMono Nerd Font Mono"
 font-size = 20
 font-thicken = true
 
-theme = tokyonight-storm
+theme = tokyonight storm
 macos-option-as-alt = true
 macos-titlebar-style = hidden
 keybind = super+shift+plus=increase_font_size:1
 
-command = /run/current-system/sw/bin/zsh --login -c ~/.config/tmux/run.sh
+command = /bin/zsh --login -c ~/.config/tmux/run.sh
