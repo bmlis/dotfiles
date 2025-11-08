@@ -7,6 +7,11 @@ return {
           position = "float",
         },
       },
+      styles = {
+        zen = {
+          width = 160,
+        },
+      },
     },
   },
 }

@@ -5,6 +5,7 @@ return {
     -- or whatever "colorscheme" you use to setup your HL groups :)
     -- Colours can also be set within setup, in which case this is redundant.
     "folke/tokyonight.nvim",
+    "i3d/vim-jimbothemes",
   },
   opts = {
     -- you can set different blend values for your different modes.
