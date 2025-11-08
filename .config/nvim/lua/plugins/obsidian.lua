@@ -16,18 +16,18 @@ return {
     -- see below for full list of optional dependencies 👇
   },
   opts = {
-    notes = "10-19 Journal/10 Notes/10.03 Scratchpad",
+    notes = "10-19 Life admin/10 Me/10.02 Scratchpad",
     workspaces = {
       {
         name = "personal",
-        path = "~/Workspace/Alokai",
+        path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal/",
       },
     },
     templates = {
       folder = "00-09 Admin/00 Metadata/00.01 Templates",
     },
     daily_notes = {
-      folder = "10-19 Journal/10 Notes/10.01 Daily",
+      folder = "10-19 Life admin/10 Me/10.01 Journal",
       default_tags = { "journal" },
       -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
       template = "daily",

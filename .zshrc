@@ -64,16 +64,14 @@ fi
 alias nzshrc="nvim ~/.zshrc"
 alias zshrc="source ~/.zshrc"
 alias ls="ls --color"
-alias rebuild=" darwin-rebuild switch --flake $HOME/Workspace/dotfiles/.config/nix#mbp"
+alias rebuild="sudo nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake ~/.config/nix#mbp"
+alias pckg-update="cd ~/.config/nix && nix flake update && rebuild"
 source $HOME/.aliases
 export PATH="/opt/homebrew/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/bmlis/.docker/completions $fpath)
 autoload -Uz compinit

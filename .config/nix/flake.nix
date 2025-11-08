@@ -38,6 +38,8 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, qmk, osx-cross-arm, osx-cross-avr }:
   let
     configuration = { pkgs, config, lib, ... }: {
+      nix.enable = false;
+      system.primaryUser = "deadpixel";
       nixpkgs.config.allowUnfree = true;
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
@@ -88,6 +90,7 @@
           "helm"
           "neovim"
           "node"
+          "odin"
           "qmk/qmk/qmk"
           {
             name = "arm-none-eabi-gcc@9";
@@ -104,6 +107,7 @@
           "tmux"
           "tpm"
           "zig"
+          "zsh"
         ];
       };
 
@@ -126,8 +130,8 @@
           ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
         done
             '';
-      system.activationScripts.extraUserActivation.enable = true;
-      system.activationScripts.extraUserActivation.text = let
+      system.activationScripts.activateSettings.enable = true;
+      system.activationScripts.activateSettings.text = let
         hotkeys = [
             60 # change input
             61 # change forward input
@@ -154,8 +158,6 @@
         /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
       '';
 
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
       # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.

@@ -18,4 +18,3 @@ if test -d ~/.asdf/plugins/golang; then
 fi
 export CC="gcc"
 export PATH="/opt/homebrew/bin:$PATH"
-. "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"
