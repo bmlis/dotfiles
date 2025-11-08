@@ -1,1 +1,6 @@
 .config/tmux/plugins/**
+.config/gcloud/*
+.config/github-copilot/*
+.config/htop/*
+.config/karabiner/automatic_backups/*
+
