@@ -3,5 +3,7 @@ alias rmi_dangling='docker rmi --force $(docker images -f "dangling=true" -q)'
 alias vrm_dangling='docker volume rm $(docker volume ls -qf dangling=true)'
 
 alias cw='cd /Users/$H_USER/Library/Mobile\ Documents/com~apple~CloudDocs/Workspace/'
-alias obs='nvim -c "cd/Users/deadpixel/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal | ObsidianToday"'
-alias rebuild_nix='sudo /nix/var/nix/profiles/default/bin/nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake ~/.config/nix#mbp'
+alias obs='nvim -c "cd /Users/bmlis/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal | ObsidianToday"'
+alias co='cd /Users/bmlis/Workspace/Cloud/'
+alias cn='cd /Users/bmlis/Workspace/Cloud/cloud-nucleus/'
+

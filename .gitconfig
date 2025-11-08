@@ -5,12 +5,12 @@
   co = checkout
   cb = checkout -b
 [user]
-  email = b.m.lisiecki@gmail.com
+  email = blisiecki@alokai.com
   name = Bartlomiej Lisiecki
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ487PPB0h2EgrBi80ZT+oVLbjo7OFVPgxPi75oeBCd5
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFtxoXdBBIRiasuwNCF5SUSLeR+rI5iEyKWlTEYaDaya
 [core]
   editor = vim
-  excludesfile = /home/deadpixel/.gitignore_global
+  excludesfile = /home/bmlis/.gitignore_global
 [commit]
 	gpgsign = true
 [gpg]
