@@ -14,7 +14,8 @@ fi
 
 if test -d ~/.asdf/plugins/golang; then
 	. ~/.asdf/plugins/golang/set-env.zsh
+  export PATH=${PATH}:`go env GOPATH`/bin
 fi
-export PATH=${PATH}:`go env GOPATH`/bin
-. "$HOME/.cargo/env"
 export CC="gcc"
+export PATH="/opt/homebrew/bin:$PATH"
+. "$(brew --prefix)/share/google-cloud-sdk/path.zsh.inc"

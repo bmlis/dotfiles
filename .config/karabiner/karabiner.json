@@ -1,0 +1,87 @@
+{
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Change non_us_backslash to Hyper Key",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "non_us_backslash",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "non_us_backslash" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "enabled": false,
+                        "manipulators": [
+                            {
+                                "description": "Change section to command+control+option+shift.",
+                                "from": {
+                                    "key_code": "non_us_backslash",
+                                    "modifiers": { "optional": ["caps_lock"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "modifiers": ["left_command", "left_control", "left_option"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Change section to command+control+option+shift.",
+                                "from": {
+                                    "key_code": "non_us_backslash",
+                                    "modifiers": { "mandatory": ["fn"] }
+                                },
+                                "to": [{ "key_code": "non_us_backslash" }],
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "devices": [
+                {
+                    "identifiers": { "is_keyboard": true },
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        },
+                        {
+                            "from": { "key_code": "right_command" },
+                            "to": [{ "key_code": "right_option" }]
+                        },
+                        {
+                            "from": { "key_code": "right_option" },
+                            "to": [{ "key_code": "right_command" }]
+                        }
+                    ]
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": true,
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 6519,
+                        "vendor_id": 12951
+                    }
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
+}
