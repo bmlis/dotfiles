@@ -7,6 +7,8 @@ vim.filetype.add({
   },
   extension = {
     tilt = "tilt",
+    vs = "glsl",
+    fs = "glsl",
   },
 })
 vim.treesitter.language.register("starlark", "tilt")
