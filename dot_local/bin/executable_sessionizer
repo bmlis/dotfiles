@@ -1,0 +1,35 @@
+#!/bin/bash
+
+tproj() {
+  local sel label dir session
+
+  # picker prints: label<TAB>/abs/path
+  sel="$(picker "${1:-$PWD}")" || return
+
+  label="${sel%%$'\t'*}"
+  dir="${sel#*$'\t'}"
+
+  # sanitize label for tmux session name
+  session="$(
+    printf '%s' "$label" |
+      tr ' /:.' '____' |
+      tr -cd '[:alnum:]_-'
+  )"
+
+  # fallback if label becomes empty
+  [[ -n "$session" ]] || session="proj"
+
+  # ensure session exists
+  if ! tmux has-session -t "$session" 2>/dev/null; then
+    tmux new-session -d -s "$session" -c "$dir"
+  fi
+
+  # attach or switch
+  if [[ -n "${TMUX:-}" ]]; then
+    tmux switch-client -t "$session"
+  else
+    tmux attach-session -t "$session"
+  fi
+}
+
+tproj "$@"

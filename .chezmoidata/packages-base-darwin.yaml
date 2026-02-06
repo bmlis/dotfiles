@@ -1,0 +1,32 @@
+packages:
+  base:
+    darwin:
+      brews:
+        - "asdf"
+        - "cmake"
+        - "fd"
+        - "fzf"
+        - "gcc"
+        - "git"
+        - "gnupg"
+        - "helm"
+        - "k9s"
+        - "kubectl"
+        - "lazygit"
+        - "neovim"
+        - "netcat"
+        - "oh-my-posh"
+        - "openssl@3"
+        - "pinentry-mac"
+        - "ripgrep"
+        - "tfenv"
+        - "tilt"
+        - "tmux"
+        - "zsh"
+      casks:
+        - "1password"
+        - "1password-cli"
+        - "alfred"
+        - "font-victor-mono-nerd-font"
+        - "ghostty"
+        - "orbstack"
