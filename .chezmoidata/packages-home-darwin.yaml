@@ -1,0 +1,13 @@
+packages:
+  home:
+    darwin:
+      brews:
+        - "caddy"
+        - "qmk/qmk/qmk"
+        - "glib"
+        - "odin"
+        - "zig"
+      casks:
+        - "discord"
+        - "spotify"
+        - "whatsapp"

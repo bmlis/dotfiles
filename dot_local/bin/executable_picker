@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+set -euo pipefail
+LC_ALL=C
+export LC_ALL
+
+die() {
+  printf 'sessionizer: %s\n' "$*" >&2
+  exit 127
+}
+
+need() {
+  command -v "$1" >/dev/null 2>&1 || die "missing required command: $1"
+}
+
+# Required tools
+need fd
+need fzf
+need awk
+need sort
+# Optional: if you also use tmux in this script, require it too:
+# need tmux
+
+# ...rest of your picker script...
+
+root="${1:-.}"
+root="$(cd "$root" && pwd)"
+
+repos="$(
+  fd -H -t d '^\.git$' "$root" -0 |
+    while IFS= read -r -d '' p; do
+      printf '%s\n' "${p%/.git/}"
+    done |
+    sort -u
+)"
+
+[[ -n "$repos" ]] || exit 1
+
+selection="$(
+  printf '%s\n' "$repos" |
+    awk '
+    BEGIN { OFS="\t" }
+
+    function basename(p){ sub(/.*\//,"",p); return p }
+    function dirname(p){ sub(/\/[^\/]+$/,"",p); return p }
+
+    {
+      path[NR]=$0
+      base[NR]=basename($0)
+      cntBase[base[NR]]++
+    }
+
+    END{
+      for(i=1;i<=NR;i++){
+        label[i]=base[i]
+        if(cntBase[base[i]]==1){ done[i]=1 }
+        else { done[i]=0; up[i]=dirname(path[i]) }
+      }
+
+      while(1){
+        delete cntLabel; active=0
+        for(i=1;i<=NR;i++) if(!done[i]){ cntLabel[label[i]]++; active++ }
+        if(active==0) break
+
+        changed=0
+        for(i=1;i<=NR;i++){
+          if(done[i]) continue
+          if(cntLabel[label[i]]==1){ done[i]=1; continue }
+
+          if(up[i]=="" || up[i]=="/" || up[i]==path[i]){ done[i]=1; continue }
+          label[i]=basename(up[i]) "/" label[i]
+          up[i]=dirname(up[i])
+          changed=1
+        }
+        if(!changed) break
+      }
+
+      for(i=1;i<=NR;i++) print label[i], path[i]
+    }
+  ' |
+    sort -f |
+    fzf --delimiter='\t' --with-nth=1 \
+      --prompt='repo> ' --height=80% --layout=reverse --border
+)"
+
+[[ -n "${selection:-}" ]] || exit 1
+printf '%s\n' "${selection}"

@@ -61,19 +61,29 @@ else
 fi
 
 # Aliases
-alias nzshrc="nvim ~/.zshrc"
-alias zshrc="source ~/.zshrc"
 alias ls="ls --color"
-alias rebuild="sudo nix run nix-darwin/nix-darwin-25.05#darwin-rebuild -- switch --flake ~/.config/nix#mbp"
-alias pckg-update="cd ~/.config/nix && nix flake update && rebuild"
 source $HOME/.aliases
-export PATH="/opt/homebrew/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -s $HOME/.nvm ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/bmlis/.docker/completions $fpath)
 autoload -Uz compinit
 compinit
 # End of Docker CLI completions
+
+# Sessionizer plugin
+if [ -x $HOME/.local/bin/sessionizer ]; then
+  autoload -Uz add-zle-hook-widget
+  sessionizer-widget() {
+    zle -I
+    command sessionizer ~/Workspace
+    zle redisplay
+  }
+
+  zle -N sessionizer-widget
+  bindkey '^X^P' sessionizer-widget
+fi

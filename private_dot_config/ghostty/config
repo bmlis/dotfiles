@@ -10,4 +10,4 @@ keybind = super+shift+minus=decrease_font_size:1
 background-opacity = 0.9
 background-blur = true
 
-command = /usr/local/bin/zsh --login -c ~/.config/tmux/run.sh
+command = ~/.local/bin/zsh --login -c ~/.local/bin/default_tmux_session.sh
