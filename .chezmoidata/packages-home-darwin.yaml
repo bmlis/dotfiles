@@ -3,10 +3,10 @@ packages:
     darwin:
       brews:
         - "caddy"
-        - "qmk/qmk/qmk"
         - "glib"
         - "odin"
         - "zig"
+        - "asmvik/formulae/yabai"
       casks:
         - "discord"
         - "spotify"

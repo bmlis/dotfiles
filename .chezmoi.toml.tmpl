@@ -5,3 +5,7 @@ profile = {{- $profile | quote }}
 
 [hooks.read-source-state.pre]
 command = ".local/share/chezmoi/.install-password-manager.sh"
+
+[git]
+autoCommit = true
+autoPush = true
