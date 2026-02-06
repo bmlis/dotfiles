@@ -62,7 +62,7 @@ fi
 
 # Aliases
 alias ls="ls --color"
-source $HOME/.aliases
+[ -s "$HOME/.aliases" ] && \. $HOME/.aliases
 
 if [ -s $HOME/.nvm ]; then
   export NVM_DIR="$HOME/.nvm"
