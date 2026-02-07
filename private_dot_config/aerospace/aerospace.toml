@@ -189,4 +189,6 @@ on-mode-changed = []
     run = 'move-node-to-workspace comms'
 
 [[on-window-detected]]
+    if.window-type = "normal"
+    if.window-role = "AXWindow"
     run = 'move-node-to-workspace other'
