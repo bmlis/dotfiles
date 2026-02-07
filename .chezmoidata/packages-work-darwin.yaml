@@ -8,5 +8,6 @@ packages:
         - "spacelift-io/spacelift/spacectl"
         - "tilt-dev/tap/ctlptl"
       casks:
+        - "claude-code"
         - "openlens"
         - "slack"
