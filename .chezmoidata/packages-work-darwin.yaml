@@ -1,0 +1,12 @@
+packages:
+  work:
+    darwin:
+      brews:
+        - "chart-testing"
+        - "graphviz"
+        - "uv"
+        - "spacelift-io/spacelift/spacectl"
+        - "tilt-dev/tap/ctlptl"
+      casks:
+        - "openlens"
+        - "slack"

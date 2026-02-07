@@ -3,11 +3,11 @@
   name = {{ index . "first name" "value" }} {{ index . "last name" "value" }}
   email = {{ index . "email" "value" }}
 {{- end }}
-  signingkey = {{ onepasswordRead "op://Private/gh-ssh-key/public key" }}
+  signingkey = {{ onepasswordRead (printf "op://%s/gh-ssh-key/public key" (index .onepassword .profile "vault" )) }}
 [core]
   editor = vim
 [commit]
-	gpgsign = true
+  gpgsign = true
 [gpg]
   format = ssh
 [gpg "ssh"]
