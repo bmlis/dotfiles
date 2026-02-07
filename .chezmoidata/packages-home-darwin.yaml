@@ -6,7 +6,6 @@ packages:
         - "glib"
         - "odin"
         - "zig"
-        - "asmvik/formulae/yabai"
       casks:
         - "discord"
         - "spotify"
