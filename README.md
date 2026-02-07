@@ -9,3 +9,9 @@
    1. Make sure there is "Default" identity with first name, last name and email matching your GitHub profile
 1. `chezmoi apply`
 1. Change origin to ssh one
+
+## Todo
+
+### System settings
+defaults write com.apple.spaces spans-displays -bool true && killall SystemUIServer
+defaults write com.apple.dock expose-group-apps -bool true && killall Dock
