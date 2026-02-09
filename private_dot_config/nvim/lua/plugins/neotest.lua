@@ -8,7 +8,9 @@ return {
     adapters = {
       ["neotest-python"] = {
         runner = "pytest",
-        python = ".venv/bin/python",
+        python = function()
+          return vim.fn.exepath("python3") or vim.fn.exepath("python")
+        end,
         args = { "-vv" },
         is_test_file = function(file_path)
           if not vim.endswith(file_path, ".py") then
