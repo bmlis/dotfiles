@@ -1,4 +1,5 @@
 font-family = "VictorMono Nerd Font Mono"
+window-inherit-font-size = false
 font-size = 16
 font-thicken = true
 
