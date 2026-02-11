@@ -10,7 +10,7 @@ if [ -d "$HOME/Workspace/Odin" ]; then
   path=("$HOME/Workspace/Odin" $path)
 fi
 
-if [ -x "opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin" ]; then
+if [ -d "opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin" ]; then
   path=("/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin", $path)
 fi
 
