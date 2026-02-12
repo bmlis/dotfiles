@@ -176,7 +176,7 @@ if.app-name-regex-substring = 'Arc'
 run = 'move-node-to-workspace web'
 
 [[on-window-detected]]
-if.app-name-regex-substring = '1Password'
+if.app-name-regex-substring = '1Password$'
 run = 'move-node-to-workspace private'
 
 [[on-window-detected]]
