@@ -3,7 +3,7 @@ window-inherit-font-size = false
 font-size = 20
 font-thicken = true
 
-theme = Catppuccin Mocha
+theme = Catppuccin Latte
 macos-option-as-alt = true
 macos-titlebar-style = hidden
 keybind = super+shift+plus=increase_font_size:1

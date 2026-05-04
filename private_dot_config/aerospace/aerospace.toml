@@ -161,11 +161,11 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # alt-shift-l = ['join-with right', 'mode main']
 
 [workspace-to-monitor-force-assignment]
-web = 'main'
+web = ['secondary', 'M28U', 'main']
 code = 'main'
 other = 'main'
 private = 'main'
-comms = ['secondary', 'main']
+comms = ['Built-in', 'secondary', 'main']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'Ghostty'
